@@ -30,7 +30,7 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end ">
                     <img className='mr-5' src="https://i.ibb.co.com/KckPb7BT/user.png" alt="user profile picture" />
-                    <a className="bg-gray-900 px-6 py-3 text-white">Login</a>
+                    <NavLink to='/login'><a className="bg-gray-900 px-6 py-3 text-white">Login</a></NavLink>
                 </div>
             </div>
         </div>
