@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router';
+import { AuthContext } from '../Provider/AuthContext';
 
 const Navbar = () => {
+    const {user, logout} = useContext(AuthContext);
     const navbarItems =<>
     <li><NavLink to='/'>Home</NavLink></li>
     <li><NavLink to='/about'>About</NavLink></li>
     <li><NavLink to='/career'>Career</NavLink></li>
     </>
+    const handlelogout =()=>{
+        logout()
+        .then(res=>console.log(res))
+        .catch(error=>console.log(error))
+    }
     return (
         <div className='max-w-6xl mx-auto mt-5 mb-5'>
             <div className="navbar bg-base-100">
@@ -29,8 +36,18 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end ">
+                    {user ? 
+                    <>
+                    {user.displayName? user.displayName : user.reloadUserInfo?.providerUserInfo[0]?.screenName ? user.reloadUserInfo.providerUserInfo[0].screenName : user.email }
+                    <button onClick={handlelogout}><a className="bg-gray-900 px-6 py-3 text-white">Logout</a></button>
+                    </>
+                    :
+                    <>
                     <img className='mr-5' src="https://i.ibb.co.com/KckPb7BT/user.png" alt="user profile picture" />
                     <NavLink to='/login'><a className="bg-gray-900 px-6 py-3 text-white">Login</a></NavLink>
+                    </>
+                    }
+                    
                 </div>
             </div>
         </div>
